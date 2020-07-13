@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<body>
+<meta http-equiv="refresh" content="1" />
+<script src= "https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<link rel= "stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<script src= "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<canvas id="myCanvas" width="2000" height="1000" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+
+<script>
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+
+// Red rectangle
+ctx.beginPath();
+ctx.lineWidth = "1";
+ctx.strokeStyle = "red";
+ctx.rect(0, 0, 400, 1000);  
+ctx.stroke();
+
+ctx.beginPath();
+ctx.lineWidth = "1";
+ctx.strokeStyle = "red";
+ctx.rect(400, 0, 400, 1000);  
+ctx.stroke();
+
+ctx.beginPath();
+ctx.lineWidth = "1";
+ctx.strokeStyle = "red";
+ctx.rect(400, 0, 800, 1000);  
+ctx.stroke();
+
+ctx.beginPath();
+ctx.lineWidth = "1";
+ctx.strokeStyle = "red";
+ctx.rect(400, 0, 1200, 1000);  
+ctx.stroke();
+
+ctx.beginPath();
+ctx.lineWidth = "1";
+ctx.strokeStyle = "red";
+ctx.rect(400, 0, 1600, 1000);  
+ctx.stroke();
+
+// $(document).ready(function(){
+$.getJSON("posisi.json", function(json){
+  var xs = (json[0].x);
+  var ys = (json[0].y);
+  console.log(json)
+  console.log(xs);
+  console.log(ys);
+  ctx.beginPath();
+  ctx.lineWidth = "1";
+  ctx.strokeStyle = "red";
+  ctx.rect(xs, ys, 50, 50);  
+  ctx.stroke();
+});
+  // });
+
+
+
+</script> 
+
+</body>
+</html>
