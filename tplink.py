@@ -21,7 +21,7 @@ def callback(pkt):
             # print (rssi) #ReceivedSignalStrengthIndicator
             l = 67.6 #2400mhzFreq
             n = 4 #PathLossEnv
-            txPower = 40
+            txPower = 42
             # hasil = math.pow(10, (txPower - rssi - l) / (10 * n))
             hasil = math.pow(10, (txPower - rssi -l) / (10 * n))
 
@@ -30,8 +30,8 @@ def callback(pkt):
             rssi1.append(hasil)
         else : 
             try:
-                # print("jarak Sebenarnya1",mode(rssi1))
-                print("jarak Sebenarnya2",(rssi1[-1]))
+                print("jarak Sebenarnya1",mode(rssi1))
+                # print("jarak Sebenarnya2",(rssi1[-1]))
                 print ("=========")
             except Exception:
                 pass

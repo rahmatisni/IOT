@@ -20,18 +20,19 @@ def callback(pkt):
             rssi = pkt.dBm_AntSignal
             # print (rssi) #ReceivedSignalStrengthIndicator
             l = 67.6 #2400mhzFreq
-            n = 4 #PathLossEnv
-            txPower = 40
+            # n = 2 #outdoor
+            n = 4 #indoor
+            txPower = 36
             # hasil = math.pow(10, (txPower - rssi - l) / (10 * n))
             hasil = math.pow(10, (txPower - rssi -l) / (10 * n))
 
-            # print (rssi)
+            print (rssi)
             # print (hasil, "meter")
             rssi1.append(hasil)
         else : 
             try:
-                # print("jarak Sebenarnya1",mode(rssi1))
-                print("jarak Sebenarnya2",(rssi1[-1]))
+                print("jarak Sebenarnya1",min(rssi1))
+                # print("jarak Sebenarnya2",(rssi1[-1]))
                 print ("=========")
             except Exception:
                 pass

@@ -21,63 +21,64 @@ networks2.set_index("BSSID", inplace=True)
 networks3 = pd.DataFrame(columns=["BSSID", "dBm_Signal3", "meter3"])
 # set the index BSSID (MAC address of the AP)
 networks3.set_index("BSSID", inplace=True)
-networks.loc["0c:a8:a7:69:a1:8c"] = (-30,1)
+# networks.loc["0c:a8:a7:69:a1:8c"] = (-30,2)
     # networks.loc[bssid] = (dbm_signal,meter)
 
-
+networks.loc["bssid"] = ("Nan","Nan")
 networks2.loc["0c:a8:a7:69:a1:8c"] = ("Nan","Nan")
 networks3.loc["0c:a8:a7:69:a1:8c"] = ("Nan","Nan")
 
 def callback(packet):
     if packet.haslayer(Dot11ProbeReq):
-        if packet.addr2 == "0c:a8:a7:69:a1:8c":
+        # if packet.addr2 == "0c:a8:a7:69:a1:8c":
 
-            # extract the MAC address of the networks
-            bssid = packet.addr2
-            # get the name of it
-            try:
-                dbm_signal = packet.dBm_AntSignal
-            except:
-                dbm_signal = "N/A"
-            
-            n = 10 #PathLossEnv
-            txPower = 0
-            meter = math.pow(10, (txPower - dbm_signal) / (10 * n))
-            # networks.loc[bssid] = (dbm_signal,meter)
+        # extract the MAC address of the networks
+        bssid = packet.addr2
+        # get the name of it
+        try:
+            dbm_signal = packet.dBm_AntSignal
+        except:
+            dbm_signal = "N/A"
+        
+        n = 10 #PathLossEnv
+        txPower = 0
+        meter = math.pow(10, (txPower - dbm_signal) / (10 * n))
+        # networks.loc[bssid] = (dbm_signal,meter)
 
 def callback2(packet):
     if packet.haslayer(Dot11ProbeReq):
-        if packet.addr2 == "0c:a8:a7:69:a1:8c":
+    # if packet.addr2 == "0c:a8:a7:69:a1:8c":
 
-            # extract the MAC address of the networks
-            bssid = packet.addr2
-            # get the name of it
-            try:
-                dbm_signal = packet.dBm_AntSignal
-            except:
-                dbm_signal = "N/A"
-            l = 67.6 #2400mhzFreq          
-            n = 2 #PathLossEnv
-            txPower = 36
-            meter = math.pow(10, (txPower - dbm_signal-l) / (10 * n))
-            networks2.loc[bssid] = (dbm_signal,meter)
+        # extract the MAC address of the networks
+        bssid = packet.addr2
+        # get the name of it
+        try:
+            dbm_signal = packet.dBm_AntSignal
+        except:
+            dbm_signal = "N/A"
+        
+        n = 10 #PathLossEnv
+        txPower = 0
+        meter = math.pow(10, (txPower - dbm_signal) / (10 * n))
+        networks2.loc[bssid] = (dbm_signal,meter)
 
 def callback3(packet):
     if packet.haslayer(Dot11ProbeReq):
-        if packet.addr2 == "0c:a8:a7:69:a1:8c":
+        # if packet.addr2 == "0c:a8:a7:69:a1:8c":
 
-            # extract the MAC address of the networks
-            bssid = packet.addr2
-            # get the name of it
-            try:
-                dbm_signal = packet.dBm_AntSignal
-            except:
-                dbm_signal = "N/A"
-            
-            n = 10 #PathLossEnv
-            txPower = 0
-            meter = math.pow(10, (txPower - dbm_signal) / (10 * n))
-            networks3.loc[bssid] = (dbm_signal,meter)
+        # extract the MAC address of the networks
+        bssid = packet.addr2
+        # get the name of it
+        try:
+            dbm_signal = packet.dBm_AntSignal
+        except:
+            dbm_signal = "N/A"
+        
+        n = 10 #PathLossEnv
+        txPower = 20
+        meter = math.pow(10, (txPower - dbm_signal) / (10 * n))
+        if networks.loc[bssid,column_indexer]
+        networks3.loc[bssid] = (dbm_signal,meter)
 
 def print_all():
     while True:
@@ -91,9 +92,9 @@ def print_all():
         val3 = result['meter3'].values[0]
         
         P=lx.Project(mode='2D',solver='LSE')
-        P.add_anchor('anchore_A',(2,1))
-        P.add_anchor('anchore_B',(1,1))
-        P.add_anchor('anchore_C',(2,1))
+        P.add_anchor('anchore_A',(1,1))
+        P.add_anchor('anchore_B',(10,2))
+        P.add_anchor('anchore_C',(1,2))
 
         t,label=P.add_target()
 
@@ -121,7 +122,7 @@ def change_channel3():
 
 def bisa ():
     # interface name, check using iwconfig
-    interface = "wlan0mon"
+    interface = "wlan1mon"
     channel_changer = Thread(target=change_channel1)
     channel_changer.daemon = True
     channel_changer.start()
@@ -129,7 +130,7 @@ def bisa ():
     sniff(prn=callback, iface=interface)
 def bisa2 ():
     # interface name, check using iwconfig
-    interface = "wlan1mon"
+    interface = "wlan2mon"
     channel_changer = Thread(target=change_channel2)
     channel_changer.daemon = True
     channel_changer.start()
@@ -138,7 +139,7 @@ def bisa2 ():
     
 def bisa3 ():
     # interface name, check using iwconfig
-    interface = "wlan2mon"
+    interface = "wlan3mon"
     channel_changer = Thread(target=change_channel3)
     channel_changer.daemon = True
     channel_changer.start()
